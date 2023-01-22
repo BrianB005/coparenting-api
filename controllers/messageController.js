@@ -6,7 +6,7 @@ const pusher = new Pusher({
   key: process.env.key,
   secret: process.env.secret,
   cluster: process.env.cluster,
-  encrypted: true,
+  useTLS: true,
 });
 const sendMessage = async (req, res) => {
   req.body.sender = req.user.userId;
