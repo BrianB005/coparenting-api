@@ -1,7 +1,23 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcryptjs");
-
+const ChildSchema = new mongoose.Schema({
+  firstName: {
+    type: String,
+    required: [true, "Please provide your first name"],
+    minlength: 3,
+    maxlength: 50,
+  },
+  lastName: {
+    type: String,
+    required: [true, "Please provide your last name"],
+    minlength: 3,
+    maxlength: 50,
+  },
+  dob: {
+    type: Date,
+  },
+});
 const UserSchema = new mongoose.Schema(
   {
     firstName: {
@@ -40,15 +56,22 @@ const UserSchema = new mongoose.Schema(
       minlength: 6,
     },
     coparent: {
-      type: String,
+      type: mongoose.Types.ObjectId,
+      ref: "User",
     },
     profilePic: {
       public_id: { type: String },
       url: {
         type: String,
+        default:
+          "https://res.cloudinary.com/dgfilrlm4/image/upload/v1675440004/download_dcsffw.png",
       },
     },
+    children: {
+      type: [ChildSchema],
+    },
   },
+
   { timestamps: true }
 );
 

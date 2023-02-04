@@ -8,7 +8,7 @@ const addImages = async (req, res) => {
   let images1 = [];
   if (images.length === 1) {
     const result = await cloudinary.uploader.upload(images[0].image, {
-      folder: "School",
+      folder: "Memories",
     });
     const image = { public_id: result.public_id, url: result.secure_url };
     req.body.images = [image];
@@ -17,7 +17,7 @@ const addImages = async (req, res) => {
   } else {
     for (const image of images) {
       const result = await cloudinary.uploader.upload(image?.image, {
-        folder: "School",
+        folder: "Memories",
       });
       const savedImage = {
         public_id: result.public_id,

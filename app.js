@@ -22,6 +22,7 @@ const errorHandlerMiddleware = require("./middleware/error-handler");
 const authRouter = require("./routes/auth");
 const messagesRouter = require("./routes/messageRoutes");
 const galleryRouter = require("./routes/galleryRoutes");
+const userRouter = require("./routes/userRoutes");
 
 app.set("trust proxy", 1);
 app.use(
@@ -40,11 +41,12 @@ app.use(express.json());
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/messages", messagesRouter);
 app.use("/api/v1/gallery", galleryRouter);
+app.use("/api/v1/users", userRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
 
-const port = process.env.PORT || 5002;
+const port = process.env.PORT || 5000;
 const start = async (res) => {
   try {
     await connectDB(process.env.MONGO_URI);

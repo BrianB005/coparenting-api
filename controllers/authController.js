@@ -33,8 +33,8 @@ const login = async (req, res) => {
     throw new CustomError.UnauthenticatedError("Wrong password");
   }
   const tokenUser = UserTokenPayload(user);
-  attachCookiesToResponse({ res, user: tokenUser });
-  res.status(StatusCodes.OK).json({ user: tokenUser });
+  const token = createJWT({ payload: tokenUser });
+  res.status(StatusCodes.CREATED).json({ user, token: token });
 };
 const logout = async (req, res) => {
   res.status(StatusCodes.OK).json({ msg: "user logged out!" });
