@@ -1,7 +1,7 @@
 const Message = require("../models/Message");
 const Pusher = require("pusher");
 const User = require("../models/User");
-
+const cloudinary = require("../services/cloudinary");
 const pusher = new Pusher({
   appId: process.env.app_id,
   key: process.env.key,
