@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcryptjs");
+const autopopulate = require("mongoose-autopopulate");
 const ChildSchema = new mongoose.Schema({
   firstName: {
     type: String,
@@ -58,6 +59,7 @@ const UserSchema = new mongoose.Schema(
     coparent: {
       type: mongoose.Types.ObjectId,
       ref: "User",
+      autopopulate: true,
     },
     profilePic: {
       public_id: { type: String },

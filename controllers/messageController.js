@@ -13,8 +13,8 @@ const sendMessage = async (req, res) => {
   req.body.sender = req.user.userId;
   const currentUser = await User.findById(req.user.userId);
   req.body.recipient = currentUser?.coparent;
-  if (req.body.image) {
-    const result = await cloudinary.uploader.upload(req.body.image, {
+  if (req.file.path) {
+    const result = await cloudinary.uploader.upload(req.file.path, {
       folder: "Messages",
     });
     const savedImage = {
