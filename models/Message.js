@@ -10,7 +10,7 @@ const MessageSchema = mongoose.Schema(
     body: {
       type: String,
       required: true,
-      maxLength: [200, "Message is too long"],
+      maxLength: [400, "Message is too long"],
     },
     sender: {
       type: mongoose.Types.ObjectId,
@@ -23,10 +23,11 @@ const MessageSchema = mongoose.Schema(
       required: [true, "Receiver can't be empty"],
     },
     image: {
-      public_id: { type: String },
-      url: {
-        type: String,
-      },
+      // public_id: { type: String },
+      // url: {
+      //   type: String,
+      // },
+      type: String,
     },
   },
   { timestamps: true }

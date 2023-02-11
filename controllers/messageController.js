@@ -13,16 +13,7 @@ const sendMessage = async (req, res) => {
   req.body.sender = req.user.userId;
   const currentUser = await User.findById(req.user.userId);
   req.body.recipient = currentUser?.coparent;
-  if (req.file.path) {
-    const result = await cloudinary.uploader.upload(req.file.path, {
-      folder: "Messages",
-    });
-    const savedImage = {
-      public_id: result.public_id,
-      url: result.secure_url,
-    };
-    req.body.image = savedImage;
-  }
+
   const message = await Message.create(req.body);
   pusher.trigger(message.sender.toString(), "message", { message });
   pusher.trigger(message.recipient.toString(), "message", { message });
