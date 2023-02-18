@@ -23,11 +23,11 @@ const MessageSchema = mongoose.Schema(
       required: [true, "Receiver can't be empty"],
     },
     image: {
-      // public_id: { type: String },
-      // url: {
-      //   type: String,
-      // },
-      type: String,
+      public_id: { type: String },
+      url: {
+        type: String,
+      },
+      // type: String,
     },
   },
   { timestamps: true }

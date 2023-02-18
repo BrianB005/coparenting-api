@@ -13,7 +13,6 @@ const sendMessage = async (req, res) => {
   req.body.sender = req.user.userId;
   const currentUser = await User.findById(req.user.userId);
   req.body.recipient = currentUser?.coparent;
-
   const message = await Message.create(req.body);
   pusher.trigger(message.sender.toString(), "message", { message });
   pusher.trigger(message.recipient.toString(), "message", { message });
