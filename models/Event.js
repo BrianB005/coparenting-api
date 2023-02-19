@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const ExpenseSchema = new mongoose.Schema(
+const EventSchema = new mongoose.Schema(
   {
     user: {
       type: mongoose.Types.ObjectId,
@@ -29,4 +29,4 @@ const ExpenseSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Expense", ExpenseSchema);
+module.exports = mongoose.model("Event", EventSchema);
