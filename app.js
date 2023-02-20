@@ -24,6 +24,7 @@ const messagesRouter = require("./routes/messageRoutes");
 const galleryRouter = require("./routes/galleryRoutes");
 const userRouter = require("./routes/userRoutes");
 const eventsRouter = require("./routes/eventRoutes");
+const expensesRouter = require("./routes/expenseRoutes");
 
 app.set("trust proxy", 1);
 app.use(
@@ -44,6 +45,7 @@ app.use("/api/v1/messages", messagesRouter);
 app.use("/api/v1/gallery", galleryRouter);
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/events", eventsRouter);
+app.use("/api/v1/expenses", expensesRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
@@ -53,7 +55,7 @@ const start = async () => {
   try {
     await connectDB(process.env.MONGO_URI);
     app.listen(port, () =>
-      console.log(`Server is listening on port ${port}...`)
+      console.log(`Server is listening on port ${port} ...`)
     );
   } catch (error) {
     console.log(error);
