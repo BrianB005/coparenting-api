@@ -62,12 +62,8 @@ const UserSchema = new mongoose.Schema(
       autopopulate: true,
     },
     profilePic: {
-      public_id: { type: String },
-      url: {
-        type: String,
-        default:
-          "https://res.cloudinary.com/dgfilrlm4/image/upload/v1675440004/download_dcsffw.png",
-      },
+      type: String,
+      default: "download.png",
     },
     children: {
       type: [ChildSchema],

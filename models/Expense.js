@@ -21,6 +21,9 @@ const ExpenseSchema = new mongoose.Schema(
       type: Array,
       default: [],
     },
+    rejectionMessage: {
+      type: String,
+    },
     isAccepted: {
       type: Boolean,
     },
