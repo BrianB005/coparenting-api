@@ -6,7 +6,7 @@ const getUsers = async (req, res) => {
 };
 
 const getCurrentUser = async (req, res) => {
-  const currentUser = await User.findById(req.user.userId);
+  const currentUser = await User.findById(req.user.userId).populate("coparent");
   res.status(200).json(currentUser);
 };
 

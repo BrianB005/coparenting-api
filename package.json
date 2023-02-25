@@ -13,6 +13,7 @@
   "author": "Serah",
   "license": "ISC",
   "dependencies": {
+    "@pusher/push-notifications-server": "^1.2.6",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.1",
     "cloudinary": "^1.33.0",
