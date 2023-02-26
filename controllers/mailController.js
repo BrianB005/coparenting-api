@@ -9,7 +9,6 @@ const sendMail = async (req, res) => {
       pass: "htswksxlgqscegwb",
     },
   });
-
   try {
     let info = await transporter.sendMail({
       from: "Coparenting brianbett316@gmail",

@@ -25,4 +25,12 @@ const addCoparent = async (req, res) => {
   }
 };
 
-module.exports = { getCurrentUser, getUsers, addCoparent };
+const updateUser = async (req, res) => {
+  const updated = await User.findByIdAndUpdate(req.user.userId, req.body, {
+    new: true,
+    runValidators: true,
+  });
+  res.status(200).json(updated);
+};
+
+module.exports = { getCurrentUser, getUsers, addCoparent, updateUser };
