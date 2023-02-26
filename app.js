@@ -48,7 +48,6 @@ app.use("/api/v1/users", userRouter);
 app.use("/api/v1/events", eventsRouter);
 app.use("/api/v1/expenses", expensesRouter);
 app.use("/api/v1/emails", emailRouter);
-
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
 const port = process.env.PORT || 5000;
