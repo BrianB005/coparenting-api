@@ -13,7 +13,7 @@ const sendMail = async (req, res) => {
   try {
     let info = await transporter.sendMail({
       from: "Coparenting brianbett316@gmail",
-      to: req.body.recipient,
+      to: req.params.recipient,
       subject: "Invitation to join coparenting app",
       html: `<h1>Greetings</h1><br><h2>It's an android app that helps separated parents communicate effectively and organize for the well-being of their children.</h2><br> <h2>Search coparenting on playstore then Use the code below while registering</h2><br><h1 style="color: blue;font-weight: bold; text-decoration:underline">${req.user.userId}</h1>`,
       // html:
