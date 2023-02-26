@@ -20,11 +20,23 @@ const sendMessage = async (req, res) => {
   req.body.sender = req.user.userId;
   const currentUser = await User.findById(req.user.userId);
   req.body.recipient = currentUser?.coparent;
-  const message = await Message.create(req.body);
-  pusher.trigger(message.sender.toString(), "message", { message });
-  pusher.trigger(message.recipient.toString(), "message", { message });
+  const message = await Message.create(req.body)
+    .then((message) => {
+      return Message.findById(message._id)
+        .populate(["sender", "recipient"])
+        .exec();
+    })
+    .then((message) => {
+      pusher.trigger(message.sender._id.toString(), "message", { message });
+      pusher.trigger(message.recipient._id.toString(), "message", { message });
+      res.status(200).json(message);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+
   beamsClient
-    .publishToInterests(["hello", currentUser.coparent.toString()], {
+    .publishToInterests([currentUser.coparent.toString()], {
       apns: {
         aps: {
           alert: {
@@ -52,7 +64,6 @@ const sendMessage = async (req, res) => {
     .catch((error) => {
       console.error("Error:", error);
     });
-  res.status(200).json(message);
 };
 const getSingleChat = async (req, res) => {
   const currentUser = await User.findById(req.user.userId);

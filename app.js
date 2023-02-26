@@ -25,6 +25,7 @@ const galleryRouter = require("./routes/galleryRoutes");
 const userRouter = require("./routes/userRoutes");
 const eventsRouter = require("./routes/eventRoutes");
 const expensesRouter = require("./routes/expenseRoutes");
+const emailRouter = require("./routes/emailRoutes");
 
 app.set("trust proxy", 1);
 app.use(
@@ -46,6 +47,7 @@ app.use("/api/v1/gallery", galleryRouter);
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/events", eventsRouter);
 app.use("/api/v1/expenses", expensesRouter);
+app.use("/api/v1/emails", emailRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);

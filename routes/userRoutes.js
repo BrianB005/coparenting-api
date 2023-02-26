@@ -1,5 +1,9 @@
 const express = require("express");
-const { getUsers, getCurrentUser } = require("../controllers/userController");
+const {
+  getUsers,
+  getCurrentUser,
+  addCoparent,
+} = require("../controllers/userController");
 const {
   authenticateUser,
   authorizePermissions,
@@ -8,6 +12,7 @@ const router = express.Router();
 
 // router.route("/").get([authenticateUser,authorizePermissions("admin")],getUsers);
 router.route("/").get(getUsers);
+router.route("/:userId").put(authenticateUser, addCoparent);
 router.route("/current").get(authenticateUser, getCurrentUser);
 
 module.exports = router;

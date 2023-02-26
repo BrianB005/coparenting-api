@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+const autopopulate = require("mongoose-autopopulate");
 const MessageSchema = mongoose.Schema(
   {
     title: {
@@ -16,15 +16,16 @@ const MessageSchema = mongoose.Schema(
       type: mongoose.Types.ObjectId,
       required: [true, "Sender can't be empty"],
       ref: "User",
+      autopopulate: true,
     },
     recipient: {
       type: mongoose.Types.ObjectId,
       ref: "User",
       required: [true, "Receiver can't be empty"],
+      autopopulate: true,
     },
     image: {
-        type: String,
-  
+      type: String,
     },
   },
   { timestamps: true }
