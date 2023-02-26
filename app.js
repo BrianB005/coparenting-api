@@ -51,7 +51,6 @@ app.use("/api/v1/emails", emailRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
-
 const port = process.env.PORT || 5000;
 const start = async () => {
   try {
