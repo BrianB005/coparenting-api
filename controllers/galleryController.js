@@ -17,7 +17,7 @@ const addImages = async (req, res) => {
   const currentUser = await User.findById(req.user.userId);
   await Gallery.create(req.body);
   await pusher.trigger(req.user.userId, "gallery", "New item");
-  await pusher.trigger(currentUser.coparent.toString(), "gallery", "New item");
+  await pusher.trigger(currentUser?.coparent.toString(), "gallery", "New item");
   res.status(200).json(message);
   res.status(200).json("Images saved to gallery successfully");
 };

@@ -21,7 +21,7 @@ const createExpense = async (req, res) => {
   const currentUser = await User.findById(req.user.userId);
   const expense = await Expense.create(req.body);
   await pusher.trigger(req.user.userId, "expense", "New item");
-  await pusher.trigger(currentUser.coparent.toString(), "expense", "New item");
+  await pusher.trigger(currentUser?.coparent.toString(), "expense", "New item");
   beamsClient
     .publishToInterests([currentUser.coparent.toString()], {
       apns: {

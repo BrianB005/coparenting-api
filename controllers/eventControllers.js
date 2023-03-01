@@ -14,7 +14,7 @@ const createEvent = async (req, res) => {
   req.body.user = req.user.userId;
   const event = await Event.create(req.body);
   await pusher.trigger(req.user.userId, "event", "New item");
-  await pusher.trigger(currentUser.coparent.toString(), "event", "New item");
+  await pusher.trigger(currentUser?.coparent.toString(), "event", "New item");
   res.status(200).json(event);
 };
 
