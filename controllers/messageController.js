@@ -1,7 +1,7 @@
 const Message = require("../models/Message");
 const Pusher = require("pusher");
 const User = require("../models/User");
-const cloudinary = require("../services/cloudinary");
+
 const pusher = new Pusher({
   appId: process.env.app_id,
   key: process.env.key,
@@ -20,7 +20,7 @@ const sendMessage = async (req, res) => {
   req.body.sender = req.user.userId;
   const currentUser = await User.findById(req.user.userId);
   req.body.recipient = currentUser?.coparent;
-  const message = await Message.create(req.body)
+  await Message.create(req.body)
     .then((message) => {
       return Message.findById(message._id)
         .populate(["sender", "recipient"])

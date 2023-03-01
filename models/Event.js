@@ -17,6 +17,9 @@ const EventSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    notified: {
+      type: Boolean,
+    },
     startDate: {
       type: Date,
       required: true,
