@@ -11,9 +11,11 @@ const addImages = async (req, res) => {
 
 const getImages = async (req, res) => {
   const currentUser = await User.findById(req.user.userId);
-  const images = await Gallery.find(
-    $or[({ user: req.user.user }, { user: currentUser?.coparent })]
-  ).sort("-createdAt");
+  const images = await Gallery.find({
+    $or: [({ user: req.user.user }, { user: currentUser?.coparent })],
+  })
+    .populate("user")
+    .sort("-createdAt");
   res.status(200).json(images);
 };
 
