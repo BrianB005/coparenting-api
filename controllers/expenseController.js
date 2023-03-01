@@ -6,13 +6,24 @@ let beamsClient = new PushNotifications({
   instanceId: process.env.INSTANCE_ID,
   secretKey: process.env.INSTANCE_KEY,
 });
+const Pusher = require("pusher");
+
+const pusher = new Pusher({
+  appId: process.env.app_id,
+  key: process.env.key,
+  secret: process.env.secret,
+  cluster: process.env.cluster,
+  useTLS: true,
+});
 
 const createExpense = async (req, res) => {
   req.body.user = req.user.userId;
   const currentUser = await User.findById(req.user.userId);
   const expense = await Expense.create(req.body);
+  await pusher.trigger(req.user.userId, "expense", "New item");
+  await pusher.trigger(currentUser.coparent.toString(), "expense", "New item");
   beamsClient
-    .publishToInterests(["hello", currentUser.coparent.toString()], {
+    .publishToInterests([currentUser.coparent.toString()], {
       apns: {
         aps: {
           alert: {
