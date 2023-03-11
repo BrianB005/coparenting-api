@@ -54,7 +54,6 @@ cron.schedule("0 * * * *", () => {
 const checkEventsForNotification = async () => {
   const eightHoursInMillis = 8 * 60 * 60 * 1000;
   const now = new Date();
-
   const events = await Event.find({});
   for (const event of events) {
     if (
